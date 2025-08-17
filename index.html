@@ -23,6 +23,21 @@
 <body>
   <header>🎬 PopFlixV2</header>
 
+  <input type="text" id="search" placeholder="Rechercher un film..." style="width:100%; padding:10px; margin:20px 0; font-size:16px; border-radius:8px; border:none;">
+
+<script>
+  const searchInput = document.getElementById('search');
+  const cards = document.querySelectorAll('.grid .card');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    cards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      card.style.display = title.includes(query) ? 'block' : 'none';
+    });
+  });
+</script>
+
   <div class="grid">
   <div class="card" onclick="openModal('https://s1.fsvid.lol/v/01/00011/1efkbebscncj_n/Mechanic-_R%C3%A9surrection_(2016).mkv.mp4?t=tVCIrzgmFZ_88IzUj0FVuFTEafI8dLaSKitu1j6eJuc&s=1755360477&e=86400&f=58189&sp=&i=0.0','https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg','Star Wars Un Nouvel Espoir')">
     <img src="https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg" class="poster" alt="Star Wars Un Nouvel Espoir">
