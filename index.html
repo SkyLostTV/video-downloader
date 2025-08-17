@@ -45,6 +45,66 @@
     </div>
   </div>
 
+  
+  
+  // --- Recherche accent-insensible + message "aucun résultat" ---
+  (function () {
+    const input = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('.grid .card'));
+
+    // Crée / récupère le message "aucun résultat"
+    let empty = document.getElementById('no-results');
+    if (!empty) {
+      empty = document.createElement('div');
+      empty.id = 'no-results';
+      empty.textContent = 'Aucun film ne correspond à votre recherche.';
+      empty.style.cssText = 'display:none;text-align:center;opacity:.8;margin:10px 0;';
+      input.parentNode.insertBefore(empty, input.nextSibling);
+    }
+
+    // Normalisation pour ignorer accents/majuscules
+    const norm = s =>
+      (s || '')
+        .toString()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '')
+        .toLowerCase()
+        .trim();
+
+    function applyFilter(q) {
+      const nq = norm(q);
+      let shown = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent || '';
+        const extra = card.dataset.keywords || ''; // optionnel: mots-clés
+        const hay = norm(title + ' ' + extra);
+        const match = hay.includes(nq);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+
+      empty.style.display = shown ? 'none' : '';
+    }
+
+    // Filtre en direct
+    input.addEventListener('input', () => applyFilter(input.value));
+
+    // Échap pour effacer rapidement
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        input.value = '';
+        applyFilter('');
+      }
+    });
+
+    // Filtre initial (au cas où l'input a un value)
+    applyFilter(input.value);
+  })();
+</script>
+
+  
+  
   <script>
     const modal = document.getElementById('modal');
     const modalVideo = document.getElementById('modalVideo');
