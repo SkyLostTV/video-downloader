@@ -22,32 +22,7 @@
 </head>
 <body>
   <header>🎬 PopFlixV2</header>
-
-  <div class="grid">
-  <div class="card" onclick="openModal('https://s1.fsvid.lol/v/01/00011/1efkbebscncj_n/Mechanic-_R%C3%A9surrection_(2016).mkv.mp4?t=tVCIrzgmFZ_88IzUj0FVuFTEafI8dLaSKitu1j6eJuc&s=1755360477&e=86400&f=58189&sp=&i=0.0','https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg','Star Wars Un Nouvel Espoir')">
-    <img src="https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg" class="poster" alt="Star Wars Un Nouvel Espoir">
-    <h3>Star Wars Un Nouvel Espoir</h3>
-  </div>
-
-  <div class="card" onclick="openModal('https://exemple.com/film2.mp4','https://exemple.com/film2.jpg','Film 2')">
-    <img src="https://exemple.com/film2.jpg" class="poster" alt="Film 2">
-    <h3>Film 2</h3>
-  </div>
-</div>
-
-
-  <div id="modal" class="modal" onclick="closeModal(event)">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <video id="modalVideo" controls></video>
-      <a id="downloadLink" class="btn" download>Télécharger ⬇️</a>
-    </div>
-  </div>
-
-  
-  
-  // --- Recherche accent-insensible + message "aucun résultat" ---
+ // --- Recherche accent-insensible + message "aucun résultat" ---
   (function () {
     const input = document.getElementById('search');
     const cards = Array.from(document.querySelectorAll('.grid .card'));
@@ -103,6 +78,27 @@
   })();
 </script>
 
+  <div class="grid">
+  <div class="card" onclick="openModal('https://s1.fsvid.lol/v/01/00011/1efkbebscncj_n/Mechanic-_R%C3%A9surrection_(2016).mkv.mp4?t=tVCIrzgmFZ_88IzUj0FVuFTEafI8dLaSKitu1j6eJuc&s=1755360477&e=86400&f=58189&sp=&i=0.0','https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg','Star Wars Un Nouvel Espoir')">
+    <img src="https://m.media-amazon.com/images/I/81CIXJxQ3TL._UF1000,1000_QL80_.jpg" class="poster" alt="Star Wars Un Nouvel Espoir">
+    <h3>Star Wars Un Nouvel Espoir</h3>
+  </div>
+
+  <div class="card" onclick="openModal('https://exemple.com/film2.mp4','https://exemple.com/film2.jpg','Film 2')">
+    <img src="https://exemple.com/film2.jpg" class="poster" alt="Film 2">
+    <h3>Film 2</h3>
+  </div>
+</div>
+
+
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <video id="modalVideo" controls></video>
+      <a id="downloadLink" class="btn" download>Télécharger ⬇️</a>
+    </div>
+  </div>
   
   
   <script>
