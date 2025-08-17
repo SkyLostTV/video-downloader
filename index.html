@@ -1,18 +1,70 @@
-<section class="card">
-  <h2>🎬 Catalogue</h2>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Films en streaming & téléchargement</title>
+  <style>
+    body { margin:0; font-family:sans-serif; background:#0b0f19; color:#fff; }
+    header { text-align:center; padding:20px; font-size:24px; font-weight:bold; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px; padding:20px; }
+    .card { background:#1a2233; border-radius:12px; overflow:hidden; cursor:pointer; transition:transform .2s; }
+    .card:hover { transform:scale(1.05); }
+    .poster { width:100%; height:260px; object-fit:cover; }
+    .card h3 { margin:10px; font-size:16px; text-align:center; }
+    .modal { position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; visibility:hidden; opacity:0; transition:.3s; }
+    .modal.active { visibility:visible; opacity:1; }
+    .modal-content { background:#111827; padding:20px; border-radius:12px; max-width:800px; width:90%; text-align:center; }
+    video { width:100%; border-radius:8px; }
+    .btn { display:inline-block; margin-top:12px; padding:10px 16px; background:#2563eb; color:#fff; border-radius:8px; text-decoration:none; font-weight:bold; }
+    .close { position:absolute; top:20px; right:30px; font-size:30px; cursor:pointer; color:#fff; }
+  </style>
+</head>
+<body>
+  <header>🎬 Films en streaming & téléchargement</header>
+
   <div class="grid">
-    <div>
+    <div class="card" onclick="openModal('film1.mp4','film1.jpg','Film 1')">
+      <img src="film1.jpg" class="poster" alt="Film 1">
       <h3>Film 1</h3>
-      <video controls poster="miniature1.jpg" width="100%">
-        <source src="videos/film1.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
-      </video>
     </div>
-    <div>
+    <div class="card" onclick="openModal('film2.mp4','film2.jpg','Film 2')">
+      <img src="film2.jpg" class="poster" alt="Film 2">
       <h3>Film 2</h3>
-      <video controls poster="miniature2.jpg" width="100%">
-        <source src="videos/film2.mp4" type="video/mp4">
-      </video>
+    </div>
+    <!-- Dupliquez la structure ci-dessus pour ajouter d’autres films -->
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <video id="modalVideo" controls></video>
+      <a id="downloadLink" class="btn" download>Télécharger ⬇️</a>
     </div>
   </div>
-</section>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalVideo = document.getElementById('modalVideo');
+    const modalTitle = document.getElementById('modalTitle');
+    const downloadLink = document.getElementById('downloadLink');
+
+    function openModal(videoSrc, imgSrc, title) {
+      modal.classList.add('active');
+      modalVideo.src = videoSrc;
+      modalTitle.textContent = title;
+      downloadLink.href = videoSrc;
+      downloadLink.setAttribute('download', title + '.mp4');
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === modal || e.target.classList.contains('close')) {
+        modal.classList.remove('active');
+        modalVideo.pause();
+        modalVideo.src = '';
+      }
+    }
+  </script>
+</body>
+</html>
